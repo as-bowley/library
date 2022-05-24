@@ -1,0 +1,89 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.title {
+    display: grid;
+    justify-content: center;
+}
+
+.add-book-button {
+    display: grid;
+    justify-content: center;
+}
+
+.add-book-button button {
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.book-display-container {
+    display: grid;
+    grid-column: repeat(4, 1fr);
+}
+
+.pop-up-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid black;
+    width: 300px;
+}
+
+.pop-up-form.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.form-header button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}   
+
+.form {
+    padding: 10px;
+}
+
+.form label {
+    padding: 10px;
+}
+
+
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
