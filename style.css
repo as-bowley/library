@@ -21,14 +21,20 @@
 
 .container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     justify-content: center;
     padding: 20px 10px;
 }
 
 .book-display-container {
     display: grid;
-    grid-column: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.book-entry-div {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .pop-up-form {
@@ -40,7 +46,9 @@
     z-index: 10;
     background-color: white;
     border: 1px solid black;
-    width: 300px;
+    width: 500px;
+    max-width: 80%;
+    border-radius: 10px;
 }
 
 .pop-up-form.active {
@@ -51,7 +59,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 3px;
 }
 
 .form-header button {
@@ -69,7 +77,46 @@
     padding: 10px;
 }
 
+.pop-up-form .form .form-element {
+    font-size: 14px;
+}
 
+.pop-up-form .form .form-element label, .pop-up-form .form .form-element label {
+    font-weight: 600;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.pop-up-form .form .form-element input[type="text"], .pop-up-form .form .form-element input[type="number"] {
+    display: block;
+    width: 95%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.pop-up-form .form .form-element select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.pop-up-form .form .submit button {
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 5px;
+    margin-top: 10px;
+}
 
 #overlay {
     position: fixed;
