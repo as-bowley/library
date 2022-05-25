@@ -5,13 +5,16 @@ const formOverlay = document.getElementById("overlay");
 const form = document.querySelector(".pop-up-form")
 const formSubmit = document.querySelector(".submit").addEventListener('click', submitForm);
 
-const myLibrary = [];
 
-function Book(title, author, length, read) {
+const myLibrary = [];
+let bookCount = 1;          
+
+function Book(title, author, length, read, indexNum) {
     this.title = title
     this.author = author
     this.length = length
     this.read = read
+    this.indexNum = indexNum;
     this.info = function() {
       return title + ", " + author + ", " + length + ", " + read
     }
@@ -22,20 +25,9 @@ function addBook(obj) {
      displayBook();
 }
 
-function displayBook() {
-    for (let i = 0; i < myLibrary.length; i++) {
-        const div = document.createElement('div');
-        div.classList.add('book-entry-div')
-        div.innerHTML = 
-        '<p>' + 'Title: ' + myLibrary[i].title + '<br>' +
-        '<p>' + 'Author: ' + myLibrary[i].author + '<br>' +
-        '<p>' + 'Length: ' + myLibrary[i].length + '<br>' +
-        '<p>' + 'Have read: ' + myLibrary[i].read;
-        bookDisplayContainer.appendChild(div);
-    } 
-}
+ /* Form elements */
 
-function openForm() {
+ function openForm() {
     form.classList.add('active')
     formOverlay.classList.add('active')
 }
@@ -43,11 +35,6 @@ function openForm() {
 function closeForm() {
     form.classList.remove('active');
     formOverlay.classList.remove('active');
-}
-
-function resetDisplay() {
-    const currentDivs = document.getElementById("book-container");
-    currentDivs.innerHTML = "";
 }
 
 function resetForm() {
@@ -63,15 +50,50 @@ function submitForm() {
     const length = document.getElementById('length').value;
     const readStatus = document.getElementById('read-status').value;
     
-    newBook = new Book(title, author, length, readStatus);
+    
+    newBook = new Book(title, author, length, readStatus, bookCount);
 
     myLibrary.push(newBook);
+    bookCount++;
+    console.log(bookCount);
     resetDisplay()
     displayBook();
     resetForm();
     closeForm();
 }
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '500 Pages', false);
+ /* Array display elements */
+
+function displayBook() {
+    for (let i = 0; i < myLibrary.length; i++) {
+        const div = document.createElement('div');
+        div.classList.add('book-entry-div')
+        div.innerHTML = 
+        `<p> <strong>Title:</strong> ${myLibrary[i].title} <br>
+        <strong>Author:</strong> ${myLibrary[i].author} <br>
+        <strong>Length:</strong> ${myLibrary[i].length} <br>
+        <strong>Have read:</strong> ${myLibrary[i].read} <br>
+        <button class="remove" onclick="removeEntry(this.id)" id="${myLibrary[i].indexNum}">Delete</button>`;
+        bookDisplayContainer.appendChild(div);
+    }
+}
+
+function removeEntry(clicked_id) {
+    const index = myLibrary.findIndex(object => {
+        return object.indexNum == clicked_id;
+    })
+    myLibrary.splice(index, 1);
+    resetDisplay()
+    displayBook();
+}
+
+function resetDisplay() {
+    const currentDivs = document.getElementById("book-container");
+    currentDivs.innerHTML = "";
+}
+
+
+
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '500 Pages', "Not Read", 0);
 
 addBook(theHobbit);
