@@ -25,6 +25,10 @@ function addBook(obj) {
      displayBook();
 }
 
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '500 Pages', "Not Read", 0);
+
+addBook(theHobbit);
+
  /* Form elements */
 
  function openForm() {
@@ -41,7 +45,7 @@ function resetForm() {
     document.getElementById('title').value = "";
     document.getElementById('author').value = "";
     document.getElementById('length').value = "";
-    document.getElementById('read-status').value = "";
+    //document.getElementById('read-status').value = "";
 }
 
 function submitForm() {
@@ -55,7 +59,6 @@ function submitForm() {
 
     myLibrary.push(newBook);
     bookCount++;
-    console.log(bookCount);
     resetDisplay()
     displayBook();
     resetForm();
@@ -72,7 +75,7 @@ function displayBook() {
         `<p> <strong>Title:</strong> ${myLibrary[i].title} <br>
         <strong>Author:</strong> ${myLibrary[i].author} <br>
         <strong>Length:</strong> ${myLibrary[i].length} <br>
-        <strong>Have read:</strong> ${myLibrary[i].read} <br>
+        <strong>Have read:</strong> <button class="toggleRead" onclick="toggleReadStatus(this.id)" id="${myLibrary[i].indexNum}">${myLibrary[i].read}</button> <br>
         <button class="remove" onclick="removeEntry(this.id)" id="${myLibrary[i].indexNum}">Delete</button>`;
         bookDisplayContainer.appendChild(div);
     }
@@ -92,8 +95,19 @@ function resetDisplay() {
     currentDivs.innerHTML = "";
 }
 
+function toggleReadStatus(clicked_id) {
+    const index = myLibrary.findIndex(object => {
+        return object.indexNum == clicked_id;
+    })
 
+    console.log(index);
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '500 Pages', "Not Read", 0);
+    if (myLibrary[index].read == "Read") {
+        myLibrary[index].read = "Not read";
+    } else {
+        myLibrary[index].read = "Read"
+    }
+    resetDisplay()
+    displayBook();
+}
 
-addBook(theHobbit);
