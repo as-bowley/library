@@ -25,7 +25,7 @@ function addBook(obj) {
      displayBook();
 }
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '500', "Not Read", 0);
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '500', "Not read", 0);
 
 addBook(theHobbit);
 
@@ -45,7 +45,6 @@ function resetForm() {
     document.getElementById('title').value = "";
     document.getElementById('author').value = "";
     document.getElementById('length').value = "";
-    //document.getElementById('read-status').value = "";
 }
 
 function submitForm() {
@@ -53,7 +52,6 @@ function submitForm() {
     const author = document.getElementById('author').value;
     const length = document.getElementById('length').value;
     const readStatus = document.getElementById('read-status').value;
-    
     
     newBook = new Book(title, author, length, readStatus, bookCount);
 
