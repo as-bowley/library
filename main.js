@@ -25,7 +25,7 @@ function addBook(obj) {
      displayBook();
 }
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '500 Pages', "Not Read", 0);
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '500', "Not Read", 0);
 
 addBook(theHobbit);
 
@@ -72,11 +72,13 @@ function displayBook() {
         const div = document.createElement('div');
         div.classList.add('book-entry-div')
         div.innerHTML = 
-        `<p> <strong>Title:</strong> ${myLibrary[i].title} <br>
+        `<button class="remove" onclick="removeEntry(this.id)" id="${myLibrary[i].indexNum}">&times</button>
+        <p> <strong>Title:</strong> ${myLibrary[i].title} <br>
         <strong>Author:</strong> ${myLibrary[i].author} <br>
-        <strong>Length:</strong> ${myLibrary[i].length} <br>
-        <strong>Have read:</strong> <button class="toggleRead" onclick="toggleReadStatus(this.id)" id="${myLibrary[i].indexNum}">${myLibrary[i].read}</button> <br>
-        <button class="remove" onclick="removeEntry(this.id)" id="${myLibrary[i].indexNum}">Delete</button>`;
+        <strong>Length:</strong> ${myLibrary[i].length} Pages <br>
+         <br>
+         <button class="toggleRead ${myLibrary[i].read.replace(/\s+/g, '')}" onclick="toggleReadStatus(this.id)" id="${myLibrary[i].indexNum}">${myLibrary[i].read}</button>
+        `;
         bookDisplayContainer.appendChild(div);
     }
 }
@@ -100,12 +102,14 @@ function toggleReadStatus(clicked_id) {
         return object.indexNum == clicked_id;
     })
 
-    console.log(index);
-
     if (myLibrary[index].read == "Read") {
         myLibrary[index].read = "Not read";
+        document.getElementById(clicked_id).classList.add('Notread');
+        document.getElementById(clicked_id).classList.remove('Read');
     } else {
-        myLibrary[index].read = "Read"
+        myLibrary[index].read = "Read";
+        document.getElementById(clicked_id).classList.add('Read');
+        document.getElementById(clicked_id).classList.remove('Notread');
     }
     resetDisplay()
     displayBook();
